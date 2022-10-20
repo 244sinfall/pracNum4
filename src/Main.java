@@ -22,11 +22,31 @@ public class Main {
         return analyzer.analyse(str);
     }
     public static void main(String[] args) {
+        Analyzer ConsonantsLambda = (str) -> {
+            String cons = "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
+            int amount = 0;
+            for(int i = 0; i < str.length(); i++) {
+                if(cons.contains(String.valueOf(str.charAt(i)))) {
+                    amount++;
+                }
+            }
+            return amount;
+        };
+        Analyzer VowelsLambda = (str) -> {
+            String vowels = "aeiouAEIOU";
+            int amount = 0;
+            for(int i = 0; i < str.length(); i++) {
+                if(vowels.contains(String.valueOf(str.charAt(i)))) {
+                    amount++;
+                }
+            }
+            return amount;
+        };
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите строку для анализа (только латиница):");
         String stringToAnalyze = scanner.nextLine();
-        int vowels = Main.analyzeString(stringToAnalyze, new VowelsCountAnalyzer());
-        int consonants = Main.analyzeString(stringToAnalyze, new ConsonantsCountAnalyzer());
+        int vowels = Main.analyzeString(stringToAnalyze, VowelsLambda);
+        int consonants = Main.analyzeString(stringToAnalyze, ConsonantsLambda);
         int lambdaStrCount = Main.analyzeString(stringToAnalyze, String::length);
         System.out.printf("В строке %d гласных и %d согласных. Всего в строке %d символов\n", vowels, consonants, lambdaStrCount);
         System.exit(0);
